@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--- 命名空间 namespace -->
+<mapper namespace="com.liuxingyu.mybatis.dao.BookDao">
+    <resultMap id="bookMap1" type="com.liuxingyu.mybatis.entity.Book">
+        <association property="type" select="com.liuxingyu.mybatis.dao.TypeDao.findById" column="tid"></association>
+    </resultMap>
+    <resultMap id="bookMap2" type="com.liuxingyu.mybatis.entity.Book">
+        <id column="id" property="id"></id>
+        <result property="name" column="type_name"></result>
+        <result property="author" column="author"></result>
+        <result property="price" column="price"></result>
+        <result property="descri" column="descri"></result>
+        <result property="pubDate" column="pubDate"></result>
+        <association property="type">
+            <id property="id" column="type_id"></id>
+            <result property="name" column="type_name"></result>
+        </association>
+    </resultMap>
+    <!-- 查询sql -->
+    <select id="findById" resultMap="bookMap1" parameterType="int">
+        select * from t_book where id =#{id}
+    </select>
+    <select id="findById2" resultMap="bookMap2" parameterType="int">
+        select b.*,t.id type_id,t.name type_name from t_book b inner join t_type t on b.tid=t.id where b.id=#{id}
+    </select>
+</mapper>

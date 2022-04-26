@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--- 命名空间 namespace -->
+<mapper namespace="com.liuxingyu.mybatis.dao.TypeDao">
+    <!-- 查询sql -->
+    <select id="findById" resultType="com.liuxingyu.mybatis.entity.Type" parameterType="int">
+        select * from t_type where id =#{tid}
+    </select>
+</mapper>
